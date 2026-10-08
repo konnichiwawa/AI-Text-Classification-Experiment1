@@ -70,7 +70,7 @@ print(f"前20个预测结果：{test_pred[:20]}")
 prediction_df = pd.DataFrame(test_pred)
 
 prediction_df.to_csv(
-    "predictions_9247.csv",
+    "predictions.csv",
     index=False,
     header=False
 )
