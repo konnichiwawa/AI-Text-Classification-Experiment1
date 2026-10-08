@@ -29,7 +29,7 @@
 9. 分析 N-gram 特征容量对分类性能的影响；
 10. 根据验证集结果选择最终模型；
 11. 使用全部训练数据重新训练最终模型；
-12. 对测试集进行预测并生成 `predictions_9247.csv`；
+12. 对测试集进行预测并生成 `prediction.csv`；
 13. 对实验结果进行可视化和分析。
 
 ## 3. 实验环境
@@ -519,7 +519,7 @@ TfidfVectorizer(
 
 最终预测结果保存为：
 
-`predictions_9247.csv`
+`prediction.csv`
 
 该文件包含测试集对应的预测类别，并按照原测试数据的顺序保存。文件不包含额外的索引列和表头。
 
@@ -582,7 +582,7 @@ TfidfVectorizer(
 5. 增加 MLP 的神经元数量或隐藏层数量没有带来持续的性能提升，说明增加模型复杂度并不一定能够提高泛化性能。
 6. N-gram 实验表明，Bigram 的效果与特征容量有关。在固定 8000 维特征容量时，加入 Bigram 后准确率下降；将特征容量增加到 12000 后，准确率提升至 92.47%。
 7. 因此，最终采用 `TF-IDF(max_features=12000, ngram_range=(1,2)) + MLP(100,)` 作为最终模型。
-8. 最终模型确定后，使用全部 7368 条训练数据重新训练，并生成 2457 条测试集预测结果，保存为 `predictions_9247.csv`。
+8. 最终模型确定后，使用全部 7368 条训练数据重新训练，并生成 2457 条测试集预测结果，保存为 `prediction.csv`。
 
 整体来看，本实验通过控制数据划分、固定随机种子以及逐步比较特征参数、模型参数和 N-gram 表示，完成了一个具有可重复性的文本分类实验流程。
 
@@ -599,7 +599,7 @@ TfidfVectorizer(
 | `final_model_9247.py` | 最终模型训练与测试集预测代码 |
 | `plot_results.py` | 绘制 MLP 训练损失曲线 |
 | `predictions.csv` | 前期 8000 维 Unigram MLP 基础模型生成的预测结果 |
-| `predictions_9247.csv` | 最终 12000 维 Unigram+Bigram MLP 模型生成的提交预测结果 |
+| `prediction.csv` | 最终 12000 维 Unigram+Bigram MLP 模型生成的提交预测结果 |
 | `mlp_tuning_results.csv` | 不同 MLP 网络结构的验证集实验结果 |
 | `ngram_experiment.py` | Unigram 与 Unigram+Bigram 特征实验代码 |
 | `ngram_experiment_results.csv` | N-gram 基础实验结果 |
@@ -616,7 +616,7 @@ TfidfVectorizer(
 其中：
 
 - `predictions.csv` 为前期基础模型的实验结果；
-- `predictions_9247.csv` 为最终确定的提交预测文件；
+- `prediction.csv` 为最终确定的提交预测文件；
 - `mlp_tuning_results.csv`、`ngram_experiment_results.csv` 和 `ngram_capacity_results.csv` 用于记录实验过程；
 - 各类 `.png` 文件用于展示实验结果。
 
@@ -626,7 +626,7 @@ TfidfVectorizer(
 
 最终提交预测文件为：
 
-`predictions_9247.csv`
+`prediction.csv`
 
 ## 17. 实验可复现说明
 
@@ -640,7 +640,7 @@ TfidfVectorizer(
   - MLP：`hidden_layer_sizes=(100,)`
   - `max_iter=300`
   - `random_state=42`
-- 在当前实验环境下，最终模型在验证集上的准确率为 **92.47%**，最终测试集预测结果保存在 `predictions_9247.csv` 中。
+- 在当前实验环境下，最终模型在验证集上的准确率为 **92.47%**，最终测试集预测结果保存在 `prediction.csv` 中。
 
 由于测试集没有提供真实标签，因此无法在本地直接计算测试集准确率。
 
@@ -718,7 +718,7 @@ TfidfVectorizer(
 `final_model_9247.py`
 
 该程序使用全部 7368 条训练数据重新训练：
-模型训练完成后，对 2457 条测试数据进行预测，并生成 `predictions_9247.csv`。
+模型训练完成后，对 2457 条测试数据进行预测，并生成 `prediction.csv`。
 
 - TF-IDF：`max_features=12000`
 - TF-IDF：`ngram_range=(1,2)`
@@ -839,7 +839,7 @@ TF-IDF 将文本转换为高维、稀疏的数值特征。对于这种特征表�
 
 在确定最终模型后，使用全部 7368 条有标签训练数据重新训练模型，并对 2457 条无标签测试数据进行预测，最终生成：
 
-`predictions_9247.csv`
+`prediction.csv`
 
 通过本实验可以看出，在文本分类任务中，合理的特征表示、特征容量和模型结构需要结合具体数据集通过受控实验进行选择。实验中的多个结果也说明，模型复杂度并非越高越好，N-gram 特征的效果也与特征容量有关。
 
