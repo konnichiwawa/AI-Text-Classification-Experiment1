@@ -1,0 +1,2 @@
+﻿特征表示,ngram_range,max_features,hidden_layer_sizes,max_iter,验证集准确率
+Unigram + Bigram,"(1, 2)",12000,"(100,)",300,0.9246947082767978
