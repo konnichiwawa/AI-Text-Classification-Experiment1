@@ -76,6 +76,6 @@ prediction_df.to_csv(
 )
 
 print("\n" + "=" * 50)
-print("最终预测文件已保存：predictions_9247.csv")
+print("最终预测文件已保存：prediction.csv")
 print(f"预测结果数量：{len(test_pred)}")
 print("=" * 50)
